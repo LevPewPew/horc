@@ -1,5 +1,25 @@
 {
   "name": "horc",
   "version": "0.1.0",
-  "bin": "./index.js"
+  "description": "A highly opinionated React component and boilterplate generator script. Focuses on seperation of concerns.",
+  "bin": "./index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LevPewPew/horc.git"
+  },
+  "keywords": [
+    "react",
+    "component",
+    "generator",
+    "boilerplate"
+  ],
+  "author": "Levente Toth",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LevPewPew/horc/issues"
+  },
+  "homepage": "https://github.com/LevPewPew/horc#readme"
 }
