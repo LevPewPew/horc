@@ -156,9 +156,7 @@ if (!fs.existsSync(dir)) {
   fs.mkdirSync(dir);
 
   createFileWithBoilerplate("index.tsx", indexBoilerplate);
-  if (props.length > 0) {
-    createFileWithBoilerplate(`${componentName}.d.ts`, typesBoilerplate);
-  }
+  createFileWithBoilerplate(`${componentName}.d.ts`, typesBoilerplate);
   createFileWithBoilerplate(`${componentName}.styles.ts`, stylesBoilerplate);
   createFileWithBoilerplate(`${componentName}.stories.tsx`, storiesBoilerplate);
   createFileWithBoilerplate(`${componentName}.test.tsx`, testsBoilerplate);
