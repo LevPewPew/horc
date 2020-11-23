@@ -8,6 +8,17 @@ const dir = `./${componentName}`;
 
 const props = args.slice(1);
 
+const camelPad = (str) => {
+  return str
+    .replace(/([A-Z]+)([A-Z][a-z])/g, " $1 $2")
+    .replace(/([a-z\d])([A-Z])/g, "$1 $2")
+    .replace(/([a-zA-Z])(\d)/g, "$1 $2")
+    .replace(/^./, (str) => {
+      return str.toUpperCase();
+    })
+    .trim();
+};
+
 const insertIndexProps = () => {
   if (props.length > 0) {
     const snippet = props
@@ -37,9 +48,9 @@ const insertTypesProps = () => {
 const insertStoriesArgTypesProps = () => {
   const fillArgTypeTemplate = (propName) => {
     return `  ${propName}: {
-      name: "${
+      name: "${camelPad(
         propName.slice(0, 1).toUpperCase() + propName.slice(1, propName.length)
-      }",
+      )}",
       description: /* DESCRIPTION */,
       control: /* CONTROL */,
       table: { type: { summary: /* TYPE */, detail: "${propName}" } },
@@ -59,7 +70,7 @@ const insertStoriesArgTypesProps = () => {
 const insertStoriesTemplateProps = () => {
   if (props.length > 0) {
     const snippet = props.reduce((prev, curr) => {
-      return prev + "\n  " + curr + ": /* TYPE */";
+      return prev + "\n  " + curr + ": /* TYPE */,";
     }, "");
 
     return snippet;
