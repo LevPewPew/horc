@@ -110,6 +110,8 @@ const storiesBoilerplate = `// also exported from '@storybook/react' if you can 
 import { Meta, Story } from "@storybook/react/types-6-0"
 import React from "react"
 import styled from "styled-components"
+import { ThemeProvider } from "styled-components"
+import themes from "../../../themes"
 import ${componentName} from "."
 
 const Wrapper = styled.div\`
@@ -126,9 +128,11 @@ export default {
 } as Meta
 
 const Template: Story<${componentName}Props> = (args) => (
-  <Wrapper>
-    <${componentName} {...args} />
-  </Wrapper>
+  <ThemeProvider theme={themes.light}>
+    <Wrapper>
+      <${componentName} {...args} />
+    </Wrapper>
+  </ThemeProvider>
 )
 
 export const General = Template.bind({})
@@ -138,12 +142,16 @@ General.args = {${insertStoriesTemplateProps()}
 
 const testsBoilerplate = `import { render, screen } from "@testing-library/react"
 import React from "react"
+import { ThemeProvider } from "styled-components"
+import themes from "../../../themes"
 import ${componentName} from "."
 
 describe("${componentName}", () => {
   beforeEach(() => {
     render(
-      <${componentName} /* PROPS, IF ANY */ />
+      <ThemeProvider theme={themes.light}>
+        <${componentName} /* PROPS, IF ANY */ />
+      </ThemeProvider>
     )
   })
 
