@@ -1,6 +1,6 @@
 {
   "name": "horc",
-  "version": "0.1.5",
+  "version": "0.1.8",
   "description": "A highly opinionated React component and boilterplate generator script. Focuses on seperation of concerns.",
   "bin": "./index.js",
   "scripts": {

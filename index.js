@@ -80,7 +80,7 @@ const insertStoriesTemplateProps = () => {
 };
 
 const indexBoilerplate = `import React from "react"
-import S from "./${componentName}.styles"
+import { ExtendedStyles as E, Styles as S } from "./${componentName}.styles"
 
 const ${componentName} = (${insertIndexProps()}) => {
   return (
@@ -99,11 +99,11 @@ const typesBoilerplate = `interface ${componentName}Props {${insertTypesProps()}
 
 const stylesBoilerplate = `import styled from "styled-components"
 
-export default {
-  // element styles
-  Wrapper: styled./* ELEMENT */\`\`,
-  // extended styles
+export const Styles = {
+  Wrapper: styled./* ELEMENT */\`\`
 }
+
+export const ExtendedStyles = {}
 `;
 
 const storiesBoilerplate = `// also exported from '@storybook/react' if you can deal with breaking changes in 6.1
@@ -136,9 +136,9 @@ General.args = {${insertStoriesTemplateProps()}
 }
 `;
 
-const testsBoilerplate = `import { render, screen } from "@testing-library/react"
-import React from "react"
+const testsBoilerplate = `import React from "react"
 import ${componentName} from "."
+import { render, screen } from "../../../helpers/test-utils"
 
 describe("${componentName}", () => {
   beforeEach(() => {
