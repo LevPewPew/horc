@@ -136,7 +136,8 @@ General.args = {${insertStoriesTemplateProps()}
 }
 `;
 
-const testsBoilerplate = `import React from "react"
+const testsBoilerplate = `import "@testing-library/jest-dom/extend-expect"
+import React from "react"
 import ${componentName} from "."
 import { render, screen } from "../../../helpers/test-utils"
 
