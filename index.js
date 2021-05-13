@@ -36,7 +36,7 @@ const insertIndexProps = () => {
 const insertTypesProps = () => {
   if (props.length > 0) {
     const snippet = props.reduce((prev, curr) => {
-      return prev + "\n  " + curr + ": /* TYPE */";
+      return prev + "\n    " + curr + ": /* TYPE */";
     }, "");
 
     return snippet;
@@ -93,7 +93,9 @@ const ${componentName} = (${insertIndexProps()}) => {
 export default ${componentName}
 `;
 
-const typesBoilerplate = `interface ${componentName}Props {${insertTypesProps()}
+const typesBoilerplate = `namespace ${componentName} {
+  export interface Props {${insertTypesProps()}
+  }
 }
 `;
 
@@ -168,7 +170,7 @@ if (!fs.existsSync(dir)) {
   fs.mkdirSync(dir);
 
   createFileWithBoilerplate("index.tsx", indexBoilerplate);
-  createFileWithBoilerplate(`${componentName}.d.ts`, typesBoilerplate);
+  createFileWithBoilerplate(`${componentName}.types.ts`, typesBoilerplate);
   createFileWithBoilerplate(`${componentName}.styles.ts`, stylesBoilerplate);
   createFileWithBoilerplate(`${componentName}.stories.tsx`, storiesBoilerplate);
   createFileWithBoilerplate(`${componentName}.test.tsx`, testsBoilerplate);
