@@ -27,9 +27,9 @@ const insertIndexProps = () => {
       }, "")
       .slice(0, -2);
 
-    return `{ ${snippet} }: ${componentName}Props`;
+    return `{ ${snippet} }: ${componentName}.Props`;
   } else {
-    return "";
+    return `{}: ${componentName}.Props`;
   }
 };
 
@@ -127,7 +127,7 @@ export default {
   },
 } as Meta
 
-const Template: Story<${componentName}Props> = (args) => (
+const Template: Story<${componentName}.Props> = (args) => (
   <Wrapper>
     <${componentName} {...args} />
   </Wrapper>
