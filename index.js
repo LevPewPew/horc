@@ -27,7 +27,7 @@ const insertComponentProps = () => {
       }, "")
       .slice(0, -2);
 
-    return `{ ${snippet}, className }: ${componentName}.Props`;
+    return `{ className, ${snippet} }: ${componentName}.Props`;
   } else {
     return `{ className }: ${componentName}.Props`;
   }
@@ -82,7 +82,6 @@ const insertStoriesTemplateProps = () => {
 const indexBoilerplate = `import { ${componentName} } from "./${componentName}"
 
 export { ${componentName} }
-
 `;
 
 const componentBoilerplate = `import React from "react"
@@ -99,8 +98,8 @@ export const ${componentName} = (${insertComponentProps()}) => {
 `;
 
 const typesBoilerplate = `namespace ${componentName} {
-  export interface Props {${insertTypesProps()}
-    className?: string
+  export interface Props {className?: string
+    ${insertTypesProps()}
   }
 }
 `;
