@@ -39,7 +39,7 @@ const insertTypesProps = () => {
       return prev + "\n    " + curr + ": /* TYPE */";
     }, "");
 
-    return snippet;
+    return snippet.trimStart();
   } else {
     return "";
   }
@@ -94,11 +94,11 @@ export const ${componentName} = (${insertComponentProps()}) => {
     </S.Wrapper>
   )
 }
-
 `;
 
 const typesBoilerplate = `namespace ${componentName} {
-  export interface Props {className?: string
+  export interface Props {
+    className?: string
     ${insertTypesProps()}
   }
 }
@@ -161,7 +161,6 @@ describe("${componentName}", () => {
     expect(/* SOMETHING */).toBe(/* SOMETHING */)
   })
 })
-
 `;
 
 const createFileWithBoilerplate = (fileName, boilerplate) => {
