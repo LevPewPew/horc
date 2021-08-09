@@ -19,7 +19,7 @@ const camelPad = (str) => {
     .trim();
 };
 
-const insertIndexProps = () => {
+const insertComponentProps = () => {
   if (props.length > 0) {
     const snippet = props
       .reduce((prev, curr) => {
@@ -27,9 +27,9 @@ const insertIndexProps = () => {
       }, "")
       .slice(0, -2);
 
-    return `{ ${snippet} }: ${componentName}.Props`;
+    return `{ ${snippet}, className }: ${componentName}.Props`;
   } else {
-    return `{}: ${componentName}.Props`;
+    return `{ className }: ${componentName}.Props`;
   }
 };
 
@@ -80,21 +80,28 @@ const insertStoriesTemplateProps = () => {
 };
 
 const indexBoilerplate = `import React from "react"
+import { ${componentName} } from "./${componentName}"
+
+export { ${componentName} }
+
+`;
+
+const componentBoilerplate = `import React from "react"
 import { ExtendedStyles as E, Styles as S } from "./${componentName}.styles"
 
-const ${componentName} = (${insertIndexProps()}) => {
+export const ${componentName} = (${insertComponentProps()}) => {
   return (
-    <S.Wrapper>
+    <S.Wrapper className={className}>
       <>{/* COMPONENTS / ELEMENTS */}</>
     </S.Wrapper>
   )
 }
 
-export default ${componentName}
 `;
 
 const typesBoilerplate = `namespace ${componentName} {
   export interface Props {${insertTypesProps()}
+    className?: string
   }
 }
 `;
@@ -169,7 +176,8 @@ const createFileWithBoilerplate = (fileName, boilerplate) => {
 if (!fs.existsSync(dir)) {
   fs.mkdirSync(dir);
 
-  createFileWithBoilerplate("index.tsx", indexBoilerplate);
+  createFileWithBoilerplate('index.tsx', indexBoilerplate);
+  createFileWithBoilerplate(`${componentName}.tsx`, componentBoilerplate);
   createFileWithBoilerplate(`${componentName}.types.ts`, typesBoilerplate);
   createFileWithBoilerplate(`${componentName}.styles.ts`, stylesBoilerplate);
   createFileWithBoilerplate(`${componentName}.stories.tsx`, storiesBoilerplate);
