@@ -79,8 +79,7 @@ const insertStoriesTemplateProps = () => {
   }
 };
 
-const indexBoilerplate = `
-import { ${componentName} } from "./${componentName}"
+const indexBoilerplate = `import { ${componentName} } from "./${componentName}"
 
 export { ${componentName} }
 
