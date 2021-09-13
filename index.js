@@ -79,11 +79,6 @@ const insertStoriesTemplateProps = () => {
   }
 };
 
-const indexBoilerplate = `import { ${componentName} } from "./${componentName}"
-
-export { ${componentName} }
-`;
-
 const componentBoilerplate = `import React from "react"
 import { ExtendedStyles as E, Styles as S } from "./${componentName}.styles"
 
@@ -173,8 +168,7 @@ const createFileWithBoilerplate = (fileName, boilerplate) => {
 if (!fs.existsSync(dir)) {
   fs.mkdirSync(dir);
 
-  createFileWithBoilerplate('index.tsx', indexBoilerplate);
-  createFileWithBoilerplate(`${componentName}.tsx`, componentBoilerplate);
+  createFileWithBoilerplate(`index.tsx`, componentBoilerplate);
   createFileWithBoilerplate(`${componentName}.types.ts`, typesBoilerplate);
   createFileWithBoilerplate(`${componentName}.styles.ts`, stylesBoilerplate);
   createFileWithBoilerplate(`${componentName}.stories.tsx`, storiesBoilerplate);
